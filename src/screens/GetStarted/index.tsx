@@ -3,7 +3,7 @@ import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../utils/constants";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants/SIZE";
 const GetStartedImage = require("../../../assets/images/getStarted.jpg");
 
 const GetStarted = () => {
