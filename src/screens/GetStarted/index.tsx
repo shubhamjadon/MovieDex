@@ -4,10 +4,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants/SIZE";
+import { GetStartedScreenProps } from "../../navigators/MainNavigator";
 const GetStartedImage = require("../../../assets/images/getStarted.jpg");
 
 const GetStarted = () => {
-  const { navigate } = useNavigation();
+  const { navigate } = useNavigation<GetStartedScreenProps["navigation"]>();
   const insets = useSafeAreaInsets();
   const IMAGE_HEIGHT = SCREEN_HEIGHT - insets.bottom - insets.top - 2 * 64;
   const IMAGE_WIDTH = SCREEN_WIDTH - insets.left - insets.right;

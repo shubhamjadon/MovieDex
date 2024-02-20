@@ -24,9 +24,10 @@ import {
   TOGGLE_UPCOMING_LIKED,
 } from "../../redux/slice/UpcomingSlice";
 import { MovieObjType } from "../../apis/GetNowPlaying";
+import { HomeScreenProps } from "../../navigators/MainNavigator";
 
 const Home = () => {
-  const { navigate } = useNavigation();
+  const { navigate } = useNavigation<HomeScreenProps["navigation"]>();
   const dispatch = useDispatch();
   const { data: nowPlayingArr, isLoading: isNowPlayingLoading } = useSelector(
     (state: RootState) => state.NowPlayingSlice

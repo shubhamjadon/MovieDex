@@ -6,10 +6,11 @@ import FeatherIcon from "@expo/vector-icons/Feather";
 import { MovieObjType } from "../../apis/GetNowPlaying";
 import styles from "./styles";
 import { getImageUri } from "../../utils/helper";
+import { MovieDetailScreenProps } from "../../navigators/MainNavigator";
 
 const MovieDetail = () => {
-  const { goBack } = useNavigation();
-  const route = useRoute();
+  const { goBack } = useNavigation<MovieDetailScreenProps["navigation"]>();
+  const route = useRoute<MovieDetailScreenProps["route"]>();
   const movieData: MovieObjType = route?.params?.movieData;
   const imageUri = getImageUri(movieData.poster_path);
 
