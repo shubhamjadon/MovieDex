@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import React from "react";
 import { MovieObjType } from "../../apis/GetNowPlaying";
 import MovieCard from "../MovieCard";
@@ -14,9 +14,11 @@ const MovieList = ({ list, loading }: MovieListType) => {
     item.id?.toString();
 
   if (!list.length && loading) {
-    <View>
-      <Text style={styles.loaderText}>Loading...</Text>
-    </View>;
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#f6f6f6" />
+      </View>
+    );
   }
 
   return (

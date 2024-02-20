@@ -7,17 +7,47 @@ import { RootState } from "../../redux/store";
 import { HOME_TABS, HOME_TABS_ARR } from "../../constants/constant";
 import TabHeader from "../../components/TabHeader";
 import MovieList from "../../components/MovieList";
+import { GET_POPULAR_REQUEST } from "../../redux/slice/PopularSlice";
+import { GET_TOP_RATED_REQUEST } from "../../redux/slice/TopRatedSlice";
+import { GET_UPCOMING_REQUEST } from "../../redux/slice/UpcomingSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { data: NowPlayingArr, isLoading } = useSelector(
+  const { data: nowPlayingArr, isLoading: isNowPlayingLoading } = useSelector(
     (state: RootState) => state.NowPlayingSlice
   );
+  const { data: popularArr, isLoading: isPopularLoading } = useSelector(
+    (state: RootState) => state.PopularSlice
+  );
+  const { data: topRatedArr, isLoading: isTopRatedLoading } = useSelector(
+    (state: RootState) => state.TopRatedSlice
+  );
+  const { data: upcomingArr, isLoading: isUpcomingLoading } = useSelector(
+    (state: RootState) => state.UpcomingSlice
+  );
+
   const [selectedTab, setSelectedTab] = useState(HOME_TABS.NOW_PLAYING);
 
   useEffect(() => {
-    // dispatch(GET_NOW_PLAYING_REQUEST());
-  }, []);
+    fetchData();
+  }, [selectedTab]);
+
+  const fetchData = () => {
+    switch (selectedTab) {
+      case HOME_TABS.NOW_PLAYING:
+        !nowPlayingArr.length && dispatch(GET_NOW_PLAYING_REQUEST());
+        break;
+      case HOME_TABS.POPULAR:
+        !popularArr.length && dispatch(GET_POPULAR_REQUEST());
+        break;
+      case HOME_TABS.TOP_RATED:
+        !topRatedArr.length && dispatch(GET_TOP_RATED_REQUEST());
+        break;
+      default:
+        !upcomingArr.length && dispatch(GET_UPCOMING_REQUEST());
+        break;
+    }
+  };
 
   const handleTabPress = (newSelectedTab: number) => {
     setSelectedTab(newSelectedTab);
@@ -26,15 +56,25 @@ const Home = () => {
   const renderData = useMemo(() => {
     switch (selectedTab) {
       case HOME_TABS.NOW_PLAYING:
-        return { data: NowPlayingArr, loading: isLoading };
+        return { data: nowPlayingArr, loading: isNowPlayingLoading };
       case HOME_TABS.POPULAR:
-        return { data: NowPlayingArr, loading: isLoading };
+        return { data: popularArr, loading: isPopularLoading };
       case HOME_TABS.TOP_RATED:
-        return { data: NowPlayingArr, loading: isLoading };
+        return { data: topRatedArr, loading: isTopRatedLoading };
       default:
-        return { data: NowPlayingArr, loading: isLoading };
+        return { data: upcomingArr, loading: isUpcomingLoading };
     }
-  }, [selectedTab, NowPlayingArr, isLoading]);
+  }, [
+    selectedTab,
+    nowPlayingArr,
+    isNowPlayingLoading,
+    popularArr,
+    isPopularLoading,
+    topRatedArr,
+    isTopRatedLoading,
+    upcomingArr,
+    isUpcomingLoading,
+  ]);
 
   return (
     <View style={styles.container}>
