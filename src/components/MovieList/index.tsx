@@ -7,9 +7,10 @@ import styles from "./styles";
 interface MovieListType {
   list: MovieObjType[];
   loading: boolean;
+  onItemPress: (item: MovieObjType) => void;
 }
 
-const MovieList = ({ list, loading }: MovieListType) => {
+const MovieList = ({ list, loading, onItemPress }: MovieListType) => {
   const keyExtractor = (item: MovieObjType, index: number) =>
     item.id?.toString();
 
@@ -26,7 +27,9 @@ const MovieList = ({ list, loading }: MovieListType) => {
       <FlatList
         horizontal
         data={list}
-        renderItem={MovieCard}
+        renderItem={({ item }) => (
+          <MovieCard item={item} onPress={onItemPress} />
+        )}
         contentContainerStyle={styles.listContentContainer}
         keyExtractor={keyExtractor}
       />

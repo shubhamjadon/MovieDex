@@ -8,13 +8,18 @@ import styles from "./styles";
 
 interface MovieCardProps {
   item: MovieObjType;
+  onPress: (item: MovieObjType) => void;
 }
 
-const MovieCard = ({ item }: MovieCardProps) => {
+const MovieCard = ({ item, onPress }: MovieCardProps) => {
   const imageUri = getImageUri(item.poster_path);
 
+  const handlePress = () => {
+    onPress(item);
+  };
+
   return (
-    <View style={styles.container}>
+    <Pressable onPress={handlePress} style={styles.container}>
       <View style={styles.posterContainer}>
         <Image src={imageUri} style={styles.poster} />
         <View style={styles.blurViewContainerWrapper}>
@@ -41,7 +46,7 @@ const MovieCard = ({ item }: MovieCardProps) => {
         <Text style={styles.posterTitle}>{item.title}</Text>
         <Text style={styles.posterReleaseDate}>{item.release_date}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

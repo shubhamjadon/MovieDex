@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { GET_NOW_PLAYING_REQUEST } from "../../redux/slice/NowPlayingSlice";
 import { RootState } from "../../redux/store";
@@ -10,8 +11,10 @@ import MovieList from "../../components/MovieList";
 import { GET_POPULAR_REQUEST } from "../../redux/slice/PopularSlice";
 import { GET_TOP_RATED_REQUEST } from "../../redux/slice/TopRatedSlice";
 import { GET_UPCOMING_REQUEST } from "../../redux/slice/UpcomingSlice";
+import { MovieObjType } from "../../apis/GetNowPlaying";
 
 const Home = () => {
+  const { navigate } = useNavigation();
   const dispatch = useDispatch();
   const { data: nowPlayingArr, isLoading: isNowPlayingLoading } = useSelector(
     (state: RootState) => state.NowPlayingSlice
@@ -76,6 +79,10 @@ const Home = () => {
     isUpcomingLoading,
   ]);
 
+  const handleMoviePress = (movieData: MovieObjType) => {
+    navigate("MovieDetail", { movieData });
+  };
+
   return (
     <View style={styles.container}>
       <TabHeader
@@ -84,7 +91,11 @@ const Home = () => {
         handleTabPress={handleTabPress}
       />
       <View style={styles.container}>
-        <MovieList list={renderData.data} loading={renderData.loading} />
+        <MovieList
+          list={renderData.data}
+          loading={renderData.loading}
+          onItemPress={handleMoviePress}
+        />
       </View>
     </View>
   );
