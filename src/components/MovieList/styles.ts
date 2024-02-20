@@ -2,8 +2,13 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#000",
     flex: 1,
+  },
+  listContentContainer: {
+    paddingTop: 64,
+  },
+  loaderText: {
+    color: "#f6f6f6",
   },
 });
 

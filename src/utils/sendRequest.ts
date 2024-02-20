@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-export const BASE_URL = "https://api.themoviedb.org/3";
+export const BASE_URL = process.env.EXPO_PUBLIC_TMDB_BASE_URL;
 
 const instance = axios.create({
   baseURL: BASE_URL,
