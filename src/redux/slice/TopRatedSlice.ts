@@ -29,6 +29,10 @@ export const topRatedSlice = createSlice({
     GET_TOP_RATED_FAILURE: (state) => {
       state.isLoading = false;
     },
+    TOGGLE_TOP_RATED_LIKED: (state, action: PayloadAction<number>) => {
+      state.data[action.payload]["liked"] =
+        !state.data[action.payload]["liked"];
+    },
   },
 });
 
@@ -36,6 +40,7 @@ export const {
   GET_TOP_RATED_REQUEST,
   GET_TOP_RATED_SUCCESS,
   GET_TOP_RATED_FAILURE,
+  TOGGLE_TOP_RATED_LIKED,
 } = topRatedSlice.actions;
 
 export default topRatedSlice.reducer;

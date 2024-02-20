@@ -29,10 +29,18 @@ export const popularSlice = createSlice({
     GET_POPULAR_FAILURE: (state) => {
       state.isLoading = false;
     },
+    TOGGLE_POPULAR_LIKED: (state, action: PayloadAction<number>) => {
+      state.data[action.payload]["liked"] =
+        !state.data[action.payload]["liked"];
+    },
   },
 });
 
-export const { GET_POPULAR_REQUEST, GET_POPULAR_SUCCESS, GET_POPULAR_FAILURE } =
-  popularSlice.actions;
+export const {
+  GET_POPULAR_REQUEST,
+  GET_POPULAR_SUCCESS,
+  GET_POPULAR_FAILURE,
+  TOGGLE_POPULAR_LIKED,
+} = popularSlice.actions;
 
 export default popularSlice.reducer;

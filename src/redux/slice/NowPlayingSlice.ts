@@ -29,6 +29,10 @@ export const nowPlayingSlice = createSlice({
     GET_NOW_PLAYING_FAILURE: (state) => {
       state.isLoading = false;
     },
+    TOGGLE_NOW_PLAYING_LIKED: (state, action: PayloadAction<number>) => {
+      state.data[action.payload]["liked"] =
+        !state.data[action.payload]["liked"];
+    },
   },
 });
 
@@ -36,6 +40,7 @@ export const {
   GET_NOW_PLAYING_REQUEST,
   GET_NOW_PLAYING_SUCCESS,
   GET_NOW_PLAYING_FAILURE,
+  TOGGLE_NOW_PLAYING_LIKED,
 } = nowPlayingSlice.actions;
 
 export default nowPlayingSlice.reducer;

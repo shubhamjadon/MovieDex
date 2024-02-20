@@ -16,6 +16,7 @@ export interface MovieObjType {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  liked: boolean;
 }
 
 export interface GetNowPlayingResponseType {

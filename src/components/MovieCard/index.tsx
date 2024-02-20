@@ -8,14 +8,25 @@ import styles from "./styles";
 
 interface MovieCardProps {
   item: MovieObjType;
+  index: number;
   onPress: (item: MovieObjType) => void;
+  handleMovieLike: (index: number) => void;
 }
 
-const MovieCard = ({ item, onPress }: MovieCardProps) => {
+const MovieCard = ({
+  item,
+  index,
+  onPress,
+  handleMovieLike,
+}: MovieCardProps) => {
   const imageUri = getImageUri(item.poster_path);
 
   const handlePress = () => {
     onPress(item);
+  };
+
+  const toggleLike = () => {
+    handleMovieLike(index);
   };
 
   return (
@@ -23,7 +34,7 @@ const MovieCard = ({ item, onPress }: MovieCardProps) => {
       <View style={styles.posterContainer}>
         <Image src={imageUri} style={styles.poster} />
         <View style={styles.blurViewContainerWrapper}>
-          <Pressable style={styles.blurViewContainer}>
+          <Pressable onPress={toggleLike} style={styles.blurViewContainer}>
             <BlurView intensity={40} style={styles.blurView}>
               <FontAwesomeIcon
                 name={"heart"}

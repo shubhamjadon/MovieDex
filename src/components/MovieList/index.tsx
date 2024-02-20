@@ -8,9 +8,15 @@ interface MovieListType {
   list: MovieObjType[];
   loading: boolean;
   onItemPress: (item: MovieObjType) => void;
+  handleMovieLike: (index: number) => void;
 }
 
-const MovieList = ({ list, loading, onItemPress }: MovieListType) => {
+const MovieList = ({
+  list,
+  loading,
+  onItemPress,
+  handleMovieLike,
+}: MovieListType) => {
   const keyExtractor = (item: MovieObjType, index: number) =>
     item.id?.toString();
 
@@ -27,8 +33,13 @@ const MovieList = ({ list, loading, onItemPress }: MovieListType) => {
       <FlatList
         horizontal
         data={list}
-        renderItem={({ item }) => (
-          <MovieCard item={item} onPress={onItemPress} />
+        renderItem={({ item, index }) => (
+          <MovieCard
+            item={item}
+            index={index}
+            onPress={onItemPress}
+            handleMovieLike={handleMovieLike}
+          />
         )}
         contentContainerStyle={styles.listContentContainer}
         keyExtractor={keyExtractor}

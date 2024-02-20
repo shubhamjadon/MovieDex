@@ -29,6 +29,10 @@ export const upcomingSlice = createSlice({
     GET_UPCOMING_FAILURE: (state) => {
       state.isLoading = false;
     },
+    TOGGLE_UPCOMING_LIKED: (state, action: PayloadAction<number>) => {
+      state.data[action.payload]["liked"] =
+        !state.data[action.payload]["liked"];
+    },
   },
 });
 
@@ -36,6 +40,7 @@ export const {
   GET_UPCOMING_REQUEST,
   GET_UPCOMING_SUCCESS,
   GET_UPCOMING_FAILURE,
+  TOGGLE_UPCOMING_LIKED,
 } = upcomingSlice.actions;
 
 export default upcomingSlice.reducer;
